@@ -1,15 +1,28 @@
+# Leetcode 28
+# class Solution:
+#     def strStr(self, haystack, needle):
+#         if needle == "":
+#             return 0
+        
+#         r, n = 0, len(needle) - 1
+
+#         for l in range(len(haystack)):
+#             if haystack[l] == needle[0]:
+#                 r = l + n
+#                 if haystack[l : r + 1] == needle:
+#                     return l
+#         return -1
+
+# better than previous
 class Solution:
     def strStr(self, haystack, needle):
         if needle == "":
             return 0
-        
-        r, n = 0, len(needle) - 1
+        m, n = len(haystack), len(needle)
 
-        for l in range(len(haystack)):
-            if haystack[l] == needle[0]:
-                r = l + n
-                if haystack[l : r + 1] == needle:
-                    return l
+        for l in range(m - n + 1):
+            if haystack[l : l + n] == needle:
+                return l
         return -1
 
         
