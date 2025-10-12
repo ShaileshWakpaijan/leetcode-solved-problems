@@ -4,7 +4,6 @@ class Solution:
         prev, crr = None, head
 
         while crr:
-            print(crr)
             temp = crr.next
             crr.next = prev
             prev = crr
