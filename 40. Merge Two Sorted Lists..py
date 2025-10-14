@@ -50,22 +50,38 @@ LL2.insert_at_last(4)
 LL2.print_list()
 print()
 
+# class Solution:
+#     def mergeTwoLists(self, list1 = None, list2 = None):
+#         dummy = crr = ListNode()
+
+#         while list1 and list2:
+#             if list1.val < list2.val:
+#                 crr.next = list1
+#                 list1 = list1.next
+#             else:
+#                 crr.next = list2
+#                 list2 = list2.next
+
+#             crr = crr.next
+        
+#         crr.next = list1 or list2
+#         return dummy.next
+
+
+########## Using Recursion ##########
 class Solution:
     def mergeTwoLists(self, list1 = None, list2 = None):
-        dummy = crr = ListNode()
-
-        while list1 and list2:
-            if list1.val < list2.val:
-                crr.next = list1
-                list1 = list1.next
-            else:
-                crr.next = list2
-                list2 = list2.next
-
-            crr = crr.next
+        if list1 is None:
+            return list2
+        if list2 is None:
+            return list1
         
-        crr.next = list1 or list2
-        return dummy.next
+        if list1.val < list2.val:
+            list1.next = self.mergeTwoLists(list1.next, list2)
+            return list1
+        else:
+            list2.next = self.mergeTwoLists(list1, list2.next)
+            return list2
 
 Solution().mergeTwoLists(LL.start, LL2.start)
 LL.print_list()
