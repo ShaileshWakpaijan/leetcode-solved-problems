@@ -47,24 +47,48 @@ print()
 
 class Solution:
     def reorderList(self, head):
-        arr = []
-        crr = head
-        while crr:
-            arr.append(crr)
-            crr = crr.next
+        # arr = []
+        # crr = head
+        # while crr:
+        #     arr.append(crr)
+        #     crr = crr.next
 
-        while arr:
-            if len(arr) > 2:
-                arr[0].next = arr[-1]
-                arr[-1].next = arr[1]
-                arr.pop(0)
-            elif len(arr) == 2:
-                arr[0].next = arr[-1]
-                arr[-1].next = None
-                arr.pop(0)
-            else:
-                arr[0].next = None
-            arr.pop()
+        # while arr:
+        #     if len(arr) > 2:
+        #         arr[0].next = arr[-1]
+        #         arr[-1].next = arr[1]
+        #         arr.pop(0)
+        #     elif len(arr) == 2:
+        #         arr[0].next = arr[-1]
+        #         arr[-1].next = None
+        #         arr.pop(0)
+        #     else:
+        #         arr[0].next = None
+        #     arr.pop()
+
+        # With O(1) Space 
+        slow, fast = head, head.next
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        
+        second = slow.next
+        slow.next = None
+
+        prev = None
+        while second:
+            temp = second.next
+            second.next = prev
+            prev = second
+            second = temp
+        
+        first, second = head, prev
+        while second:
+            temp1, temp2 = first.next, second.next
+            first.next = second
+            second.next = temp1
+            first = temp1
+            second = temp2
 
 Solution().reorderList(LL.start)
 LL.print_list()
